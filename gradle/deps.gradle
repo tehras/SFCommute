@@ -24,7 +24,9 @@ ext {
             ],
             base               : [],
             ui                 : [],
-            api                : [],
+            api                : [
+                    caltrain: project(':modules:service:caltrain')
+            ],
             libs               : [
                     restApi: 'com.github.tehras.android-mvvm:rest-api:0.2.0',
                     log    : 'com.github.tehras.android-mvvm:log:0.2.0',
@@ -71,6 +73,7 @@ ext {
             daggerApt          : "com.google.dagger:dagger-compiler:$daggerVer",
 
             retrofit           : "com.squareup.retrofit2:retrofit:$retrofitVer",
+            retrofitProto      : "com.squareup.retrofit2:converter-protobuf:$retrofitVer",
             retrofitMoshi      : "com.squareup.retrofit2:converter-moshi:$retrofitVer",
             retrofitRx         : "com.squareup.retrofit2:adapter-rxjava2:$retrofitVer",
 
@@ -88,6 +91,8 @@ ext {
 
             roomRuntime        : "androidx.room:room-runtime:$roomVer",
             roomKapt           : "androidx.room:room-compiler:$roomVer",
-            roomRx             : "androidx.room:room-rxjava2:$roomVer"
+            roomRx             : "androidx.room:room-rxjava2:$roomVer",
+
+            caltrainGtfs       : "com.google.transit:gtfs-realtime-bindings:0.0.4"
     ]
 }

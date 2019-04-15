@@ -4,5 +4,6 @@ import com.squareup.workflow.ui.ViewRegistry
 import com.squareup.workflow.ui.backstack.PushPopEffect
 
 val CaltrainViewBindings = ViewRegistry(
-    CaltrainScheduleCoordinator
+    CaltrainScheduleCoordinator,
+    CaltrainLoadingCoordinator
 ) + PushPopEffect

@@ -16,6 +16,7 @@ dependencies {
     implementation deps.design
     implementation deps.recyclerViewAdapter
     implementation deps.lottie
+    implementation deps.timber
 
     implementation deps.libs.arch
     implementation deps.libs.ext

@@ -3,6 +3,7 @@ package com.github.tehras.sfcommute.caltrain
 import com.github.tehras.sfcommute.caltrain.CaltrainScheduleScreen.Event.LoadData
 import com.github.tehras.sfcommute.panel.PanelContainerScreen
 import com.github.tehras.sfcommute.panel.asPanelOver
+import com.github.tehras.sfcommute.service.caltrain.CaltrainService
 import com.squareup.workflow.Snapshot
 import com.squareup.workflow.StatefulWorkflow
 import com.squareup.workflow.Workflow
@@ -10,6 +11,8 @@ import com.squareup.workflow.WorkflowAction.Companion.enterState
 import com.squareup.workflow.WorkflowContext
 import com.squareup.workflow.rx2.onSuccess
 import com.squareup.workflow.ui.AlertContainerScreen
+import io.reactivex.Scheduler
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 enum class CaltrainResult {
@@ -20,13 +23,13 @@ enum class CaltrainResult {
 typealias CaltrainScreen = AlertContainerScreen<PanelContainerScreen<*, *>>
 typealias CaltrainWorkflow = Workflow<Unit, CaltrainResult, CaltrainScreen>
 
-class RealCaltrainWorkflow @Inject constructor() : CaltrainWorkflow,
+class RealCaltrainWorkflow @Inject constructor(private val caltrainService: CaltrainService) : CaltrainWorkflow,
     StatefulWorkflow<Unit, CaltrainState, CaltrainResult, CaltrainScreen>() {
 
     override fun initialState(
         input: Unit,
         snapshot: Snapshot?
-    ): CaltrainState = snapshot?.let { CaltrainState.fromSnapshot(snapshot.bytes) } ?: CaltrainState.Home
+    ): CaltrainState = snapshot?.let { CaltrainState.fromSnapshot(snapshot.bytes) } ?: CaltrainState.LoadScheduleData
 
     override fun compose(
         input: Unit,
@@ -42,12 +45,16 @@ class RealCaltrainWorkflow @Inject constructor() : CaltrainWorkflow,
                 }
 
                 simpleScreen(
-                    CaltrainScheduleScreen()
+                    CaltrainScheduleScreen(schedule = state.routes)
                 )
             }
 
             CaltrainState.LoadScheduleData -> {
-                context.onSuccess() { }
+                context.onSuccess(caltrainService.caltrainRoutes().subscribeOn(Schedulers.io())) { response ->
+                    enterState(CaltrainState.Home(response))
+                }
+
+                simpleScreen(CaltrainLoadingScreen)
             }
         }
     }

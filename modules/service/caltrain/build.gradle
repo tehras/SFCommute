@@ -5,3 +5,9 @@ apply from: "$rootDir/gradle/moshi.gradle"
 apply from: "$rootDir/gradle/version.gradle"
 apply from: "$rootDir/gradle/room.gradle"
 apply from: "$rootDir/gradle/retrofit.gradle"
+
+dependencies {
+    implementation deps.caltrainGtfs
+    implementation deps.retrofitProto
+    implementation deps.timber
+}

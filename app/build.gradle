@@ -11,4 +11,6 @@ apply from: "$rootDir/gradle/appcenter.gradle"
 dependencies {
     implementation deps.libs.moshi
     implementation deps.libs.restApi
+
+    implementation deps.api.caltrain
 }
