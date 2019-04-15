@@ -1,0 +1,69 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.3.21'
+    repositories {
+        mavenLocal()
+        maven {
+            url 'https://maven.global.square/artifactory/square-public'
+        }
+        maven {
+            url 'https://maven.global.square/artifactory/square-public'
+        }
+        maven {
+            url 'https://maven.global.square/artifactory/android-public'
+        }
+        maven {
+            url 'https://maven.global.square/artifactory/android-plugins-public'
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+//        google()
+//        jcenter()
+        maven { url 'https://jitpack.io' }
+        mavenLocal()
+        maven {
+            url 'https://maven.global.square/artifactory/square-public'
+        }
+        maven {
+            url 'https://maven.global.square/artifactory/square-public'
+        }
+        maven {
+            url 'https://maven.global.square/artifactory/android-public'
+        }
+        maven {
+            url 'https://maven.global.square/artifactory/android-plugins-public'
+        }
+    }
+    buildscript {
+        /** For wire code generation, we need to have repositories defined to grab wire dependencies. */
+        repositories {
+            mavenLocal()
+            maven {
+                url 'https://maven.global.square/artifactory/square-public'
+            }
+            maven {
+                url 'https://maven.global.square/artifactory/square-public'
+            }
+            maven {
+                url 'https://maven.global.square/artifactory/android-public'
+            }
+            maven {
+                url 'https://maven.global.square/artifactory/android-plugins-public'
+            }
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

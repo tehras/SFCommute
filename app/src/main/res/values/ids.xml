@@ -1,0 +1,4 @@
+<resources>
+    <!-- ID used by PanelContainer to opt in to view persistence. -->
+    <item type="id" name="tic_tac_workflow_panel_container"/>
+</resources>

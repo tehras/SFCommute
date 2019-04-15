@@ -1,0 +1,7 @@
+apply plugin: 'com.android.library'
+apply from: "$rootDir/gradle/libs-base.gradle"
+apply from: "$rootDir/gradle/dagger.gradle"
+apply from: "$rootDir/gradle/moshi.gradle"
+apply from: "$rootDir/gradle/version.gradle"
+apply from: "$rootDir/gradle/room.gradle"
+apply from: "$rootDir/gradle/retrofit.gradle"
